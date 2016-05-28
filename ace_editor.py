@@ -23,6 +23,11 @@ from pelican.rstdirectives import Pygments
 
 ACE_PATH = 'ace-build/src-min-noconflict'
 
+try:
+    basestring
+except NameError:
+    basestring = str
+
 
 def set_default_settings(settings):
     """Give a Default Ace Editor settings."""
@@ -113,11 +118,11 @@ class JsVar(object):
         setting = self.generator.settings.get(
             'ACE_EDITOR_PLUGIN'
         )[setting_name]
-        if type(setting) is str:
+        if isinstance(setting, basestring):
             self.generator.ace_editor += "var %s = '%s';" % (
                 setting_name, setting
             )
-        elif type(setting) is bool:
+        elif isinstance(setting, bool):
             self.generator.ace_editor += "var %s = %s;" % (
                 setting_name, str.lower(str(setting))
             )
