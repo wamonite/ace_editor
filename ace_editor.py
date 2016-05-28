@@ -1,4 +1,5 @@
 """Ace_Editor adapt to a Pelican's plugin."""
+# -*- coding: utf-8 -*-
 from __future__ import print_function, unicode_literals
 
 import six
