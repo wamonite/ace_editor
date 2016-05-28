@@ -57,10 +57,10 @@ def theme_exist(ace_editor_theme):
         if ratio == max(nearest_theme[0], ratio):
             nearest_theme = (ratio, theme[6:-3])
 
-    warning(''.join(
-        'Ace edior plugin -> theme "%s" did\'nt exist. ' % ace_editor_theme,
-        'You probably think to "%s"?' % nearest_theme[1]
-    ))
+    warning(''.join((
+        'Ace editor plugin -> theme "%s" doesn\'t exist. ' % ace_editor_theme,
+        'Did you mean "%s"?' % nearest_theme[1]
+    )))
     return False
 
 
@@ -75,7 +75,7 @@ def init_ace(pelican):
     if(not pelican):
         return
     for key in ace_settings:
-        warning_text = 'Ace edior plugin -> "%s" must be ' % key
+        warning_text = 'Ace editor plugin -> "%s" must be ' % key
         typeof_def_value = type(DEFAULT_CONFIG['ACE_EDITOR_PLUGIN'][key])
         types = {
             int: "an integer.",
