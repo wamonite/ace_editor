@@ -83,6 +83,7 @@ def init_ace(pelican):
         warning_text = 'Ace editor plugin -> "%s" must be ' % key
         typeof_def_value = type(DEFAULT_CONFIG['ACE_EDITOR_PLUGIN'][key])
         types = {
+            basestring: "a string.",
             int: "an integer.",
             bool: "a boolean."
         }
@@ -91,9 +92,10 @@ def init_ace(pelican):
             not theme_exist(ace_settings['ACE_EDITOR_THEME'])
         ):
             continue
-        if type(ace_settings[key]) != typeof_def_value:
-            warning(warning_text + types[typeof_def_value])
-            continue
+        for typeof_value in types.keys():
+            if isinstance(typeof_def_value, typeof_value) and not isinstance(ace_settings[key], typeof_value):
+                warning(warning_text + types[typeof_value])
+                continue
         DEFAULT_CONFIG['ACE_EDITOR_PLUGIN'][key] = ace_settings[key]
     pelican.settings['ACE_EDITOR_PLUGIN'] = copy(
         DEFAULT_CONFIG['ACE_EDITOR_PLUGIN']
